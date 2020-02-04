@@ -8,7 +8,8 @@ function Navbar(props){
    {Name:'Home',to:'home'},
    {Name:'About',to:'/about'},
    {Name:'Video',to:'/video'},
-   {Name:'Blog',to:'/blog'}
+   {Name:'Blog',to:'/blog'},
+   {Name:'Products',to:'/products'}
  ]
 
  return(

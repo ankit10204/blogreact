@@ -2,7 +2,7 @@ const iState={
 	blogs:[],
 }
 
-const reducer=(state=iState,action)=>{
+const blogreducer=(state=iState,action)=>{
 	switch(action.type){
 	 case"UPLOAD_BLOG":
 	 var newstate = {...state}	
@@ -16,4 +16,4 @@ const reducer=(state=iState,action)=>{
 	
 }
 
-export default reducer
+export default blogreducer

@@ -5,6 +5,7 @@ import {Route,BrowserRouter} from 'react-router-dom';
 import About from './components/About';
 import Video from './components/Video';
 import Blog from './components/Blog';
+import Products from './components/Products';
 import {connect} from 'react-redux';
 import M from 'materialize-css';
 
@@ -30,6 +31,7 @@ render(){
         <Route path="/about" component={About}/>
         <Route path="/video/:video_id" render={(props)=>(<Video {...props} videos={this.props}/>)}/>
         <Route path="/blog" component={Blog}/>
+        <Route path="/products" component={Products}/>
     </div>
    </BrowserRouter> 
   );
@@ -80,9 +82,9 @@ const handleSubmit=(e)=>{
  }
 
  const mapStateToProps=(state)=>{
-  console.log(state)
+  console.log(state.blog.blogs)
    return{
-    mytitle:state.blogs,
+    mytitle:state.blog.blogs,
    }
  }
 

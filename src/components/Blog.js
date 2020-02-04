@@ -54,7 +54,7 @@ class Blog extends React.Component{
  const mapStateToProps=(state)=>{
   console.log(state)
    return{
-    myblogs:state.blogs,
+    myblogs:state.blog.blogs,
    }
  }
 
