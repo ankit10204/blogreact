@@ -2,7 +2,7 @@ import React from 'react';
 import {Link,withRouter} from 'react-router-dom';
 function Navbar(props){
   //console.log(props);
- if(props.location.pathname =='/'){props.history.push('/about')}
+ //if(props.location.pathname ==='/'){props.history.push('/about')}
  
  const navigation = [
    {Name:'Home',to:'home'},
@@ -11,7 +11,7 @@ function Navbar(props){
    {Name:'Blog',to:'/blog'},
    {Name:'Products',to:'/products'}
  ]
-
+ console.log(navigation);
  return(
      <nav>
         <div className="nav-wrapper">
@@ -19,7 +19,7 @@ function Navbar(props){
           <ul id="nav-mobile" className="left hide-on-med-and-down">
           {navigation.map(nav=>{
          
-         return <li key={Math.random()}><Link to={nav.to} style={{color:'#ffff',textDecoration:'none'}}>{nav.Name}</Link></li>
+            return <li key={Math.random()}><Link to={nav.to} style={{color:'#ffff',textDecoration:'none'}}>{nav.Name}</Link></li>
            
            })
           }

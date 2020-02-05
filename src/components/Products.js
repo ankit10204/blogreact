@@ -3,23 +3,24 @@ import Cart from './Cart';
 import {connect} from 'react-redux';
 import M from 'materialize-css';
 
+
 class Products extends React.Component{
 	constructor(props){
      super(props)
      this.state={
      	products:[
-     	{id:1,name:'levis tshirt',prize:'1800',image:'https://cdn.laredoute.com/products/641by641/3/1/b/31bad1f2bc0ae2bba3286d7b5b02b6e9.jpg'},
-     	{id:2,name:'levis jeans',prize:'1300',image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTwnMJN3f1ot_XakHXfc6PUOoP-2rSi-7wAKJftVp5qJgmPUvKv'},
-     	{id:3,name:'levis jacket',prize:'5800',image:'https://www.usmagazine.com/wp-content/uploads/2019/10/Levis-Star-Wars-Collection-Feature.jpg'},
-     	{id:4,name:'levis black tshirt',prize:'800',image:'https://cdn.laredoute.com/products/641by641/3/1/b/31bad1f2bc0ae2bba3286d7b5b02b6e9.jpg'}
+     	{id:1,name:'levis tshirt',defaultQuantity:'1',prize:'1800',image:'https://cdn.laredoute.com/products/641by641/3/1/b/31bad1f2bc0ae2bba3286d7b5b02b6e9.jpg'},
+     	{id:2,name:'levis jeans',defaultQuantity:'1',prize:'1300',image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTwnMJN3f1ot_XakHXfc6PUOoP-2rSi-7wAKJftVp5qJgmPUvKv'},
+     	{id:3,name:'levis jacket',defaultQuantity:'1',prize:'5800',image:'https://www.usmagazine.com/wp-content/uploads/2019/10/Levis-Star-Wars-Collection-Feature.jpg'},
+     	{id:4,name:'levis black tshirt',defaultQuantity:'1',prize:'800',image:'https://cdn.laredoute.com/products/641by641/3/1/b/31bad1f2bc0ae2bba3286d7b5b02b6e9.jpg'}
      	],
      	cart:[],
      }
     }
 
-	// componentDidUpdate(prevProps,prevState){
- //      console.log('Component update',this.state);
- //    }
+	componentDidUpdate(prevProps,prevState){
+      console.log('Component update',this.state);
+    }
      
     render(){
 	console.log(this.props);
@@ -40,7 +41,7 @@ class Products extends React.Component{
 		          <p>Price : Rs<strong>{product.prize}</strong></p>
 		        </div>
 		        <div className="card-action">
-		          <button className="btn waves-effect waves-light" onClick={()=>{this.props.addtocart(product); this.setState({cart:product})}}>Add to Cart
+		          <button className="btn waves-effect waves-light" onClick={()=>{this.props.addtocart(product)}}>Add to Cart
                        <i className="material-icons right"></i>
                    </button>
 		        </div>
@@ -49,7 +50,7 @@ class Products extends React.Component{
 	      )
 	     })} 
         
-	      <Cart AddProduct={this.state.cart}/>
+	      <Cart AddProduct={this.props.mycart} TotalCart={this.props.cartTotal}/>
         
         </div>
 	    )
@@ -58,7 +59,8 @@ class Products extends React.Component{
 
 const mapStatetoprops=(state)=>{
   return{
-  	mycart : state.cart.cartproducts
+  	mycart : state.cart.cartproducts,
+    cartTotal: state.cart.cartTotal
   }
 }
 
