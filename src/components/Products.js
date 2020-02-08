@@ -9,18 +9,29 @@ class Products extends React.Component{
      super(props)
      this.state={
      	products:[
-     	{id:1,name:'levis tshirt',defaultQuantity:'1',prize:'1800',image:'https://cdn.laredoute.com/products/641by641/3/1/b/31bad1f2bc0ae2bba3286d7b5b02b6e9.jpg'},
-     	{id:2,name:'levis jeans',defaultQuantity:'1',prize:'1300',image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTwnMJN3f1ot_XakHXfc6PUOoP-2rSi-7wAKJftVp5qJgmPUvKv'},
-     	{id:3,name:'levis jacket',defaultQuantity:'1',prize:'5800',image:'https://www.usmagazine.com/wp-content/uploads/2019/10/Levis-Star-Wars-Collection-Feature.jpg'},
-     	{id:4,name:'levis black tshirt',defaultQuantity:'1',prize:'800',image:'https://cdn.laredoute.com/products/641by641/3/1/b/31bad1f2bc0ae2bba3286d7b5b02b6e9.jpg'}
+     	{id:1,name:'levis tshirt',defaultQuantity:1,quantityPrize:1800,prize:'1800',image:'https://cdn.laredoute.com/products/641by641/3/1/b/31bad1f2bc0ae2bba3286d7b5b02b6e9.jpg'},
+     	{id:2,name:'levis jeans',defaultQuantity:1,quantityPrize:1300,prize:'1300',image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTwnMJN3f1ot_XakHXfc6PUOoP-2rSi-7wAKJftVp5qJgmPUvKv'},
+     	{id:3,name:'levis jacket',defaultQuantity:1,quantityPrize:5800,prize:'5800',image:'https://www.usmagazine.com/wp-content/uploads/2019/10/Levis-Star-Wars-Collection-Feature.jpg'},
+     	{id:4,name:'levis black tshirt',defaultQuantity:1,quantityPrize:800,prize:'800',image:'https://cdn.laredoute.com/products/641by641/3/1/b/31bad1f2bc0ae2bba3286d7b5b02b6e9.jpg'}
      	],
      	cart:[],
      }
     }
 
 	componentDidUpdate(prevProps,prevState){
-      console.log('Component update',this.state);
+      console.log('Component update',this.state,this.props);
     }
+  
+  componentWillUpdate(nextProps, nextState) {
+    console.log('component Will Update')
+    // if(nextProps.mycart !== this.props.mycart ){
+    //     this.setState({difficulty: this.props.difficulty})
+    // }
+  }  
+
+  componentWillReceiveProps(){
+    console.log('component Will ReceiveProps')  
+  }
      
     render(){
 	console.log(this.props);

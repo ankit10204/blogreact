@@ -8,7 +8,7 @@ import Blog from './components/Blog';
 import Products from './components/Products';
 import {connect} from 'react-redux';
 import M from 'materialize-css';
-
+import Login from './components/Login';
 
 class App extends React.Component{
  
@@ -32,6 +32,7 @@ render(){
         <Route path="/video/:video_id" render={(props)=>(<Video {...props} videos={this.props}/>)}/>
         <Route path="/blog" component={Blog}/>
         <Route path="/products" component={Products}/>
+        <Route path="/login" component={Login}/>
     </div>
    </BrowserRouter> 
   );
@@ -39,7 +40,7 @@ render(){
 }
 
 function Home(props){
-  return(
+  return(   
    <div className="row" style={{marginTop:'50px'}}>
     <form id="blogform" className="col s12" onSubmit={e=>{props.formaction.uploadblog(e,props)}}>
     <div className="row"> 
@@ -82,7 +83,7 @@ const handleSubmit=(e)=>{
  }
 
  const mapStateToProps=(state)=>{
-  console.log(state.blog.blogs)
+  //console.log(state.blog.blogs)
    return{
     mytitle:state.blog.blogs,
    }
