@@ -16,15 +16,19 @@ class Login extends React.Component{
 
    axios.post('http://localhost:8000/api/auth/login',data)
    .then(response=>{
-   	 if(response.data.status==401){
-   	 	console.log(response);
-       //this.setState({errors:response.data.errors});   
-   	  for(const error in response.data.errors){
-   	  	console.log(error);
-   	  }
+   	 console.log(response);
+     if(response.data.status==401){
+   	 	let err_email = response.data.errors.email ? response.data.errors.email : null; 
+      let err_password =  response.data.errors.password ? response.data.errors.password : null
+       this.setState({errors:{err_email:err_email,err_password:err_password}});   
    	 }
-    })
-   .catch(err=>console.log(err))
+     if(response.data.status==200){
+      localStorage.setItem('token',response.data.access_token);
+      localStorage.setItem('user',JSON.stringify(response.data.user));
+      this.props.history.push('about'); 
+     }
+   })
+   .catch(error=>{ console.error(error); return Promise.reject(error); })
    
 
   //this.props.history.push('/products');
@@ -37,23 +41,24 @@ class Login extends React.Component{
  }
 
  render(){
- 	const error = this.state.errors
+
  	return(
       <div className="login">
         <div class="row">
-             {error.length > 0 ? (<h5 style={{color:'red'}}>{error}</h5>):("") }
-		    <form class="col s12" style={{marginTop:'40px'}} onSubmit={(e)=>this.handleform(e)}>
+        <form class="col s12" style={{marginTop:'40px'}} onSubmit={(e)=>this.handleform(e)}>
 		     <div class="row">
 		        <div class="input-field col s4 offset-s4">
 		          <i class="material-icons prefix">account_circle</i>
 		          <input id="icon_prefix" type="text" name="username" class="validate" onChange={(e)=>this.handleInput(e)}/>
 		          <label for="icon_prefix">Username</label>
-		        </div>
+		         {this.state.errors.err_email ? (<p style={{color:'red'}}>{this.state.errors.err_email[0]}</p>):("") }
+            </div>
 		        <div class="input-field col s4 offset-s4">
 		          <i class="material-icons prefix">lock</i>
 		          <input id="icon_password" type="tel" name="password" class="validate" onChange={(e)=>this.handleInput(e)}/>
 		          <label for="icon_lock">Password</label>
-		        </div>
+		        {this.state.errors.err_password ? (<p style={{color:'red'}}>{this.state.errors.err_password[0]}</p>):("") }
+            </div>
 		        <div class="input-field col s4 offset-s4">
                   <button class="btn waves-effect waves-light" type="submit" name="action">login
                   </button>

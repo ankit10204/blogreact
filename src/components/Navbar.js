@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link,withRouter} from 'react-router-dom';
+import axios from 'axios';
+
 function Navbar(props){
   //console.log(props);
  //if(props.location.pathname ==='/'){props.history.push('/about')}
@@ -11,15 +13,30 @@ function Navbar(props){
    {Name:'Blog',to:'/blog'},
    {Name:'Products',to:'/products'}
  ]
- console.log(navigation);
+ const token = localStorage.getItem('token');
+ const logout=()=>{
+  const data = {
+    token:token
+  }
+
+  axios.post('http://localhost:8000/api/auth/logout',data)
+  .then(response=>{
+   if(response.status==200){
+    localStorage.getClear();
+    props.history.push('/login');
+   }
+  })
+  .catch(error=>console.log(error))
+ }
+
  return(
-     <nav>
+     <nav style={{backgroundColor:'#8a6eee'}}>
         <div className="nav-wrapper">
-          <a href="#" className="brand-logo right">Logo</a>
+         <a href="#" className="right" style={{marginRight:'20px'}}>Logout</a>
           <ul id="nav-mobile" className="left hide-on-med-and-down">
           {navigation.map(nav=>{
-         
-            return <li key={Math.random()}><Link to={nav.to} style={{color:'#ffff',textDecoration:'none'}}>{nav.Name}</Link></li>
+            
+            return (<li key={Math.random()}><Link to={nav.to} style={{color:'#ffff',textDecoration:'none'}}>{nav.Name}</Link></li>)
            
            })
           }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
-import {Route,BrowserRouter} from 'react-router-dom';
+import {Route,BrowserRouter,Switch} from 'react-router-dom';
 import About from './components/About';
 import Video from './components/Video';
 import Blog from './components/Blog';
@@ -9,6 +9,10 @@ import Products from './components/Products';
 import {connect} from 'react-redux';
 import M from 'materialize-css';
 import Login from './components/Login';
+import GuestRoute from './components/auth/GuestRoute';
+import AuthRoute from './components/auth/AuthRoute';
+import Profile from './components/Profile';
+
 
 class App extends React.Component{
  
@@ -21,18 +25,22 @@ class App extends React.Component{
  }
  
 render(){
+ 
   return (
    <BrowserRouter> 
     <div className="App">
        <Navbar/>
-        <Route path="/home" exact render={(props)=>(
-            <Home {...props} formaction={this.props}/>
-          )}/>
-        <Route path="/about" component={About}/>
-        <Route path="/video/:video_id" render={(props)=>(<Video {...props} videos={this.props}/>)}/>
-        <Route path="/blog" component={Blog}/>
-        <Route path="/products" component={Products}/>
-        <Route path="/login" component={Login}/>
+       <Switch>  
+          <Route path="/home" exact render={(props)=>(
+              <Home {...props} formaction={this.props}/>
+            )}/>
+          <Route path="/about" component={About}/>
+          <Route path="/video/:video_id" render={(props)=>(<Video {...props} videos={this.props}/>)}/>
+          <Route path="/blog" component={Blog}/>
+          <Route path="/products" component={Products}/>
+          <GuestRoute path="/login" component={Login}/>
+          <AuthRoute path="/profile" component={Profile}/>
+        </Switch>
     </div>
    </BrowserRouter> 
   );
